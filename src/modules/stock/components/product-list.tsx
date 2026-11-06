@@ -47,13 +47,13 @@ export function ProductList({ products }: { products: Product[] }) {
                         <dl className="space-y-3 border-t border-brd-subtle pt-4">
                             <div className="flex items-baseline justify-between gap-3">
                                 <dt className="text-sm text-content-muted">Preço unitário</dt>
-                                <dd className="text-sm font-medium tabular-nums text-content-primary">
+                                <dd className="text-base font-medium tabular-nums text-content-primary">
                                     {currency.format(product.unit_price)}
                                 </dd>
                             </div>
                             <div className="flex items-baseline justify-between gap-3">
                                 <dt className="text-sm text-content-muted">Preço acima de 10 unidades</dt>
-                                <dd className={`text-sm  tabular-nums ${product.promocional_price ? "text-content-accent font-semibold" : "italic text-content-muted"}`}>
+                                <dd className={`text-base  tabular-nums ${product.promocional_price ? "text-content-accent font-semibold" : "italic text-content-muted"}`}>
                                     {product.promocional_price ? currency.format(product.promocional_price) : "N/A"}
                                 </dd>
                             </div>

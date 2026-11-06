@@ -3,6 +3,8 @@ import { GuestOnly, RequireSession } from "./modules/auth/components/session-gat
 import { CustomersPage } from "./pages/customers/index.tsx"
 import { DashboardPage } from "./pages/dashboard/index.tsx"
 import { LoginPage } from "./pages/login/index.tsx"
+import { OrdersPage } from "./pages/orders/index.tsx"
+import { NewOrderPage } from "./pages/orders/new-order/index.tsx"
 import { StockPage } from "./pages/stock/index.tsx"
 import { PrivateLayout } from "./shared/components/layout/private-layout.tsx"
 
@@ -29,6 +31,8 @@ export function AppRoutes() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/estoque" element={<StockPage />} />
         <Route path="/clientes" element={<CustomersPage />} />
+        <Route path="/pedidos/novo" element={<NewOrderPage />} />
+        <Route path="/pedidos" element={<OrdersPage />} />
       </Route>
       <Route
         path="*"

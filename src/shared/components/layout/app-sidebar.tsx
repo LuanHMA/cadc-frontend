@@ -1,4 +1,4 @@
-import { LayoutDashboard, Package, Users } from "lucide-react"
+import { ClipboardList, LayoutDashboard, Package, PlusIcon, Users } from "lucide-react"
 import { useState, type ReactNode } from "react"
 import { NavLink } from "react-router"
 import { useSession } from "../../../modules/auth/hooks/use-session"
@@ -8,6 +8,8 @@ import { cn } from "../ui/cn"
 
 const links: Array<{ to: string; label: string; icon: ReactNode }> = [
   { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard/> },
+  { to: "/pedidos/novo", label: "Novo pedido", icon: <PlusIcon/> },
+  { to: "/pedidos", label: "Pedidos", icon: <ClipboardList /> },
   { to: "/estoque", label: "Estoque", icon: <Package/> },
   { to: "/clientes", label: "Clientes", icon: <Users/> },
 ]
