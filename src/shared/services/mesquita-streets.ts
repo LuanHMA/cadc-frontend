@@ -1,4 +1,9 @@
-import { isMesquitaStreet, type MesquitaStreet } from "../lib/mesquita-address"
+export type MesquitaStreet = {
+    cep: string
+    logradouro: string
+    complemento: string
+    bairro: string
+}
 
 const MESQUITA_STREETS_URL = "https://viacep.com.br/ws/RJ/Mesquita"
 
@@ -11,5 +16,6 @@ export async function searchMesquitaStreets(query: string, signal: AbortSignal):
 
     const data: unknown = await response.json()
     if (!Array.isArray(data)) return []
-    return data.filter(isMesquitaStreet)
+
+    return data.filter((item): item is MesquitaStreet => Boolean(item?.logradouro && item?.bairro))
 }

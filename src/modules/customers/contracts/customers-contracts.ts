@@ -1,7 +1,6 @@
 import z from "zod"
 import type { Pagination } from "../../../shared/types/pagination"
 import { phoneDigits } from "../../../shared/utils/formatations"
-import { houseNumberRangeMessage } from "../lib/mesquita-address"
 
 export type Customer = {
     id: string
@@ -28,14 +27,9 @@ export const CustomerFormSchema = z.object({
         return digits.length >= 10 && digits.length <= 11
     }, "Telefone inválido"),
     street: z.string("Selecione uma rua de Mesquita").trim().min(1, "Selecione uma rua de Mesquita").max(220, "Rua deve ter no máximo 220 caracteres"),
-    house_number: z.string("Número é obrigatório").trim().min(1, "Número é obrigatório").max(10, "Número deve ter no máximo 10 caracteres").regex(/^[1-9]\d*[a-zA-Z]?$/, "Informe o número da casa"),
+    house_number: z.string("Número é obrigatório").trim().min(1, "Número é obrigatório").max(10, "Número deve ter no máximo 10 caracteres"),
     district: z.string("Bairro é obrigatório").trim().min(1, "Selecione uma rua de Mesquita").max(255, "Bairro deve ter no máximo 255 caracteres"),
     complement: z.string().trim().max(255, "Ponto de referência deve ter no máximo 255 caracteres"),
-}).superRefine((data, ctx) => {
-    const rangeMessage = houseNumberRangeMessage(data.house_number, data.complement)
-    if (rangeMessage) {
-        ctx.addIssue({ code: "custom", path: ["house_number"], message: rangeMessage })
-    }
 })
 
 export type CustomerFormSchemaType = z.infer<typeof CustomerFormSchema>

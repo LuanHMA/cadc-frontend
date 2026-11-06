@@ -1,8 +1,8 @@
 import type { Control } from "react-hook-form"
 import { Input } from "../../../shared/components/ui"
+import { MesquitaAddressFields } from "../../../shared/components/ui/mesquita-address-fields"
 import { PhoneInput } from "../../../shared/components/ui/phone-input"
 import type { CustomerFormSchemaType } from "../contracts/customers-contracts"
-import { MesquitaAddressFields } from "./mesquita-address-fields"
 
 export function CustomerFormFields({ control }: { control: Control<CustomerFormSchemaType> }) {
     return (
