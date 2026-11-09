@@ -1,6 +1,7 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import { useDebouncedValue } from "../../../shared/components/hooks/use-debounce"
+import type { Customer } from "../contracts/customers-contracts"
 import { customersService } from "../services/customers.service"
 
 export const customersQueryKey = ["customers"] as const
@@ -8,6 +9,7 @@ export const customersQueryKey = ["customers"] as const
 const CUSTOMER_PAGE_SIZE = 10
 
 export function useGetCustomer() {
+    const [selectedCustomer, setSelectedCustomer] = useState<Customer["id"] | null>(null)
     const [page, setPage] = useState(1)
     const [name, setName] = useState("")
     const [phone, setPhone] = useState("")
@@ -27,6 +29,15 @@ export function useGetCustomer() {
         }, signal),
     })
 
+    const customers = data?.customers ?? []
+    const visibleCustomerId = customers.some((customer) => customer.id === selectedCustomer)
+        ? selectedCustomer
+        : customers[0]?.id ?? null
+
+    const handleSelectCustomer = (customerId: Customer["id"]) => {
+        setSelectedCustomer(customerId)
+    }
+
     function updateName(value: string) {
         setName(value)
         setPage(1)
@@ -38,7 +49,7 @@ export function useGetCustomer() {
     }
 
     return {
-        customers: data?.customers ?? [],
+        customers,
         pagination: data?.pagination ?? { page, limit: CUSTOMER_PAGE_SIZE, total: 0, total_pages: 1 },
         isLoading,
         isError,
@@ -48,6 +59,9 @@ export function useGetCustomer() {
         setName: updateName,
         setPhone: updatePhone,
         setPage,
+        handleSelectCustomer,
+        selectedCustomer: visibleCustomerId,
+        hasActiveFilters: nameQuery !== "" || phoneQuery !== "",
     }
 }
 

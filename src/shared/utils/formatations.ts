@@ -32,3 +32,11 @@ export function formatPhone(phone: string) {
     if (digits.length === 10 || digits.length === 11) return maskPhone(digits)
     return phone
 }
+
+export function formatDate(date: string) {
+    return new Date(date).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+    })
+}

@@ -14,6 +14,26 @@ export type Customer = {
     updated_at: string
 }
 
+export type CustomerDetails = {
+    id: string
+    name: string
+    phone: string
+    street: string
+    house_number: string
+    complement: string | null
+    district: string
+    created_at: string
+    updated_at: string
+    active_orders: number
+    completed_orders: number
+    total_spent: number
+}
+
+export type CustomerDetailsResponse = {
+    customer: CustomerDetails
+    message: string
+}
+
 export type CustomerResponse = {
     customers: Customer[],
     pagination: Pagination

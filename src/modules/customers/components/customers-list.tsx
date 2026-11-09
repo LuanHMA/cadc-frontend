@@ -1,73 +1,72 @@
-import { Search, SearchX } from "lucide-react"
-import { Input, Pagination } from "../../../shared/components/ui"
+import { SearchX } from "lucide-react"
+import { Pagination } from "../../../shared/components/ui"
 import type { Pagination as PaginationInfo } from "../../../shared/types/pagination"
+import { formatPhone } from "../../../shared/utils/formatations"
 import type { Customer } from "../contracts/customers-contracts"
-import { CustomersListLoading } from "./customers-list-loading"
 
 type CustomersListProps = {
     customers: Customer[]
     pagination: PaginationInfo
     page: number
-    name: string
-    phone: string
-    onNameChange: (value: string) => void
-    onPhoneChange: (value: string) => void
     onPageChange: (page: number) => void
     isLoading: boolean
+    onSelectCustomer: (customerId: Customer["id"]) => void
+    selectedCustomer: Customer["id"] | null
+    isFiltered: boolean
 }
 
 export function CustomersList({
     customers,
     pagination,
     page,
-    name,
-    phone,
-    onNameChange,
-    onPhoneChange,
-    onPageChange,
+    onPageChange: setPage,
     isLoading,
+    onSelectCustomer,
+    selectedCustomer,
+    isFiltered,
 }: CustomersListProps) {
     return (
-        <div className="space-y-4">
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-xl">
-                <Input
-                    type="search"
-                    label="Nome"
-                    placeholder="Buscar por nome"
-                    value={name}
-                    leftIcon={<Search />}
-                    onChange={(event) => onNameChange(event.target.value)}
-                />
-                <Input
-                    type="search"
-                    label="Telefone"
-                    placeholder="Buscar por telefone"
-                    inputMode="tel"
-                    value={phone}
-                    leftIcon={<Search />}
-                    onChange={(event) => onPhoneChange(event.target.value)}
-                />
+        <div className="flex flex-col space-y-4">
+            <div className="flex flex-col">
+                {customers.length === 0 ? (
+                    <div className="flex items-center gap-3 border-y border-brd-default p-4">
+                        <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-background-accent/10 text-content-muted">
+                            <SearchX className="size-4" />
+                        </span>
+                        <div className="flex flex-col items-start">
+                            <p className="text-sm font-semibold text-content-primary">
+                                {isFiltered ? "Nenhum cliente encontrado" : "Nenhum cliente cadastrado"}
+                            </p>
+                            <p className="text-sm text-content-muted">
+                                {isFiltered ? "Nenhum resultado para essa busca." : "Cadastre um cliente para começar."}
+                            </p>
+                        </div>
+                    </div>
+                ) : null}
+                {customers.map((customer) => (
+                    <div className={`flex items-center justify-between gap-4 p-4 cursor-pointer first:border-t border-t-brd-default border-b border-brd-default  ${selectedCustomer === customer.id ? "bg-background-accent/10" : ""}`} key={customer.id} onClick={() => onSelectCustomer(customer.id)}>
+                        <div className=" flex items-center gap-2">
+                            <span className="uppercase rounded-full p-2 bg-background-accent/20 text-sm">
+                                {customer.name.charAt(0)}{customer.name.charAt(1)}
+                            </span>
+                            <div className="flex flex-col items-start">
+                                <p className="text-sm text-content-primary font-semibold">{customer.name}</p>
+                                <p className="text-sm text-content-muted">{formatPhone(customer.phone)}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
 
-            {isLoading ? <CustomersListLoading /> : customers.length === 0 ? (
-                <div className="flex w-full items-center gap-2 rounded-2xl border border-brd-default bg-background-elevated p-5">
-                    <SearchX className="size-6 text-content-warning" />
-                    <p className="text-sm text-content-warning">Nenhum cliente cadastrado.</p>
-                </div>
-            ) : (
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-               
-                </div>
-            )}
-
-            {isLoading ? null : (
+            {isLoading || customers.length === 0 ? null : (
                 <Pagination
                     page={page}
                     totalPages={pagination.total_pages}
-                    onPageChange={onPageChange}
+                    onPageChange={setPage}
                 />
             )}
         </div>
+
     )
 }
 

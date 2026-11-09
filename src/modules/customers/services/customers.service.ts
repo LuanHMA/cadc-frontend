@@ -1,5 +1,5 @@
 import { api } from "../../../shared/lib/api"
-import type { CustomerBody, CustomerMutationResponse, CustomerResponse } from "../contracts/customers-contracts"
+import type { Customer, CustomerBody, CustomerDetailsResponse, CustomerMutationResponse, CustomerResponse } from "../contracts/customers-contracts"
 
 export type ListCustomersQuery = {
     page: number
@@ -19,5 +19,9 @@ export const customersService = {
 
     update(id: string, body: CustomerBody) {
         return api.put<CustomerMutationResponse>(`/customers/${id}`, { body })
+    },
+
+    get(id: Customer['id']) {
+        return api.get<CustomerDetailsResponse>(`/customers/${id}`)
     },
 }
