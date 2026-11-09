@@ -10,10 +10,9 @@ export function UpdateProductPopup({ product }: { product: Product }) {
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-            <Dialog.Trigger asChild>
-                <Button variant="outline" size="md">
-                    <PencilIcon className="size-4" />
-                    Editar
+            <Dialog.Trigger asChild >
+                <Button variant="outline" size="sm" leftIcon={<PencilIcon className="size-5" />}>
+                    Ajustar
                 </Button>
             </Dialog.Trigger>
             <Dialog.Portal>
@@ -30,6 +29,5 @@ export function UpdateProductPopup({ product }: { product: Product }) {
                 </Dialog.Content>
             </Dialog.Portal>
         </Dialog.Root>
-
     )
 }

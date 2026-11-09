@@ -20,18 +20,21 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 const sizeClass: Record<ControlSize, string> = {
+  icon: "p-2 rounded-md ",
   sm: "h-8 rounded-md text-sm",
   md: "h-10 rounded-lg text-sm",
   lg: "h-12 rounded-lg text-base",
 }
 
 const paddingClass: Record<ControlSize, string> = {
+  icon: "p-2",
   sm: "px-3",
   md: "px-4",
   lg: "px-5",
 }
 
 const iconOnlySizeClass: Record<ControlSize, string> = {
+  icon: "p-2",
   sm: "w-8 px-0",
   md: "w-10 px-0",
   lg: "w-12 px-0",

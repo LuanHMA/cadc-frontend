@@ -8,9 +8,10 @@ export interface StockResponse {
 export type Product = {
     id: "TABLE" | "CHAIR" | "KIT"
     name: string
+    stock: number
+    disponible_stock: number
     promocional_price: number | null
     unit_price: number
-    stock: number
     created_at: string
     updated_at: string
 }

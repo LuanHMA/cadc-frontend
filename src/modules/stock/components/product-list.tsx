@@ -23,26 +23,42 @@ export function ProductList({ products }: { products: Product[] }) {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
             {products.map((product) => {
                 const { icon: Icon, tone } = productTypes[product.id]
-                const units = product.stock === 1 ? "unidade" : "unidades"
 
                 return (
                     <article
                         key={product.id}
-                        className={`flex h-full flex-col gap-5 rounded-2xl border border-brd-default bg-background-elevated p-5 [&>button]:mt-auto ${product.id === "CHAIR" ? "order-2" : ""}`}
+                        className={`flex h-full relative flex-col gap-5 rounded-2xl border border-brd-default bg-background-elevated p-5 [&>button]:mt-auto ${product.id === "CHAIR" ? "order-2" : ""}`}
                     >
-                        <div className="flex min-h-14 items-center gap-3">
-                            <span className={`flex size-12 shrink-0 items-center justify-center rounded-xl ${tone}`}>
-                                <Icon className="size-6" strokeWidth={1.75} />
-                            </span>
-                            <h2 className="text-lg font-semibold tracking-tight text-content-primary">
-                                {product.name}
-                            </h2>
+
+                        <div className="flex items-center justify-between gap-4">
+                            <div className="flex min-h-14 items-center gap-3">
+                                <span className={`flex size-12 shrink-0 items-center justify-center rounded-xl ${tone}`}>
+                                    <Icon className="size-6" strokeWidth={1.75} />
+                                </span>
+                                <h2 className="text-lg font-semibold tracking-tight text-content-primary">
+                                    {product.name}
+                                </h2>
+                            </div>
+                            {product.id !== "KIT" && (
+                                <UpdateProductPopup product={product} />
+                            )}
                         </div>
 
-                        <p className="text-3xl font-semibold tabular-nums tracking-tight text-content-primary">
-                            {product.stock}
-                            <span className="ml-2 text-sm font-medium text-content-muted">{units}</span>
-                        </p>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="flex flex-col items-start border border-brd-default rounded-lg p-2 bg-b">
+                                <h2 className="text-sm font-medium text-content-muted">Estoque Total</h2>
+                                <p className="text-3xl font-semibold tabular-nums tracking-tight text-content-primary">
+                                    {product.stock}
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col items-start border border-brd-default rounded-lg p-2 bg-background-accent">
+                                <h2 className="text-sm font-medium text-content-inverse">Disponível</h2>
+                                <p className="text-3xl font-semibold tabular-nums tracking-tight text-content-inverse">
+                                    {product.disponible_stock}
+                                </p>
+                            </div>
+                        </div>
 
                         <dl className="space-y-3 border-t border-brd-subtle pt-4">
                             <div className="flex items-baseline justify-between gap-3">
@@ -59,7 +75,7 @@ export function ProductList({ products }: { products: Product[] }) {
                             </div>
                         </dl>
 
-                        <UpdateProductPopup product={product} />
+
                     </article>
                 )
             })}

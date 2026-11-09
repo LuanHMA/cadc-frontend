@@ -1,4 +1,4 @@
-export const controlSizes = ["sm", "md", "lg"] as const
+export const controlSizes = ["sm", "md", "lg", "icon"] as const
 export type ControlSize = (typeof controlSizes)[number]
 
 export const fieldVariants = ["default", "error", "success"] as const
@@ -8,9 +8,11 @@ export const controlSizeClass: Record<ControlSize, string> = {
   sm: "h-8 rounded-md text-sm",
   md: "h-10 rounded-lg text-sm",
   lg: "h-12 rounded-lg text-base",
+  icon: "rounded-lg text-sm",
 }
 
 export const controlPaddingClass: Record<ControlSize, string> = {
+  icon: "p-3",
   sm: "px-2.5",
   md: "px-3",
   lg: "px-3.5",
@@ -20,12 +22,14 @@ export const iconSlotClass: Record<ControlSize, string> = {
   sm: "w-8 [&_svg]:size-3.5",
   md: "w-9 [&_svg]:size-4",
   lg: "w-10 [&_svg]:size-5",
+  icon: "w-8 [&_svg]:size-3.5",
 }
 
 export const iconSvgClass: Record<ControlSize, string> = {
   sm: "[&_svg]:size-3.5",
   md: "[&_svg]:size-4",
   lg: "[&_svg]:size-5",
+  icon: "[&_svg]:size-3.5",
 }
 
 export const fieldVariantClass: Record<FieldVariant, string> = {
