@@ -33,7 +33,7 @@ export function CustomersPage() {
             </div>
             {isError ? <p className="text-sm text-content-danger">Erro ao buscar clientes</p> : null}
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 <div className="space-y-4">
                     {isLoading ? <CustomersListLoading /> : (
                         <div className="flex flex-col gap-4 border border-brd-default rounded-lg p-4">

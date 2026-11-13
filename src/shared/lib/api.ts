@@ -29,15 +29,9 @@ export type ApiRequestOptions<TBody = unknown> = {
   signal?: AbortSignal
 }
 
-let refreshPromise: Promise<boolean> | null = null
-let notifySessionLost: (() => void) | null = null
+const LOGIN_PATH = "/entrar"
 
-export function bindSessionLost(handler: () => void) {
-  notifySessionLost = handler
-  return () => {
-    if (notifySessionLost === handler) notifySessionLost = null
-  }
-}
+let refreshPromise: Promise<boolean> | null = null
 
 function applyPathParams(
   url: string,
@@ -118,7 +112,7 @@ async function request<TResponse, TBody = unknown>(
   return response.data
 }
 
-function refreshAccessToken() {
+function refreshSession() {
   if (!refreshPromise) {
     refreshPromise = request<unknown>("POST", "/auth/refresh", { isPublic: true })
       .then(() => true)
@@ -135,27 +129,19 @@ apiClient.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     const config = error.config
-    if (!config || config.isPublic || config._retry || error.response?.status !== 401) {
+    if (!config || config.isPublic || error.response?.status !== 401) {
       return Promise.reject(error)
     }
 
-    config._retry = true
-    const refreshed = await refreshAccessToken()
-    if (!refreshed) {
-      notifySessionLost?.()
-      return Promise.reject(error)
+    if (!config._retry) {
+      config._retry = true
+      if (await refreshSession()) return apiClient.request(config)
     }
 
-    return apiClient.request(config)
+    if (window.location.pathname !== LOGIN_PATH) window.location.href = LOGIN_PATH
+    return Promise.reject(error)
   },
 )
-
-function createMethod(method: Method) {
-  return <TResponse, TBody = unknown>(
-    url: string,
-    options?: ApiRequestOptions<TBody>,
-  ) => request<TResponse, TBody>(method, url, options)
-}
 
 export function getApiErrorMessage(error: unknown, fallback: string) {
   if (!axios.isAxiosError(error)) return fallback
@@ -164,6 +150,13 @@ export function getApiErrorMessage(error: unknown, fallback: string) {
   if (typeof message === "string" && message.length > 0) return message
   if (Array.isArray(message) && typeof message[0] === "string") return message[0]
   return fallback
+}
+
+function createMethod(method: Method) {
+  return <TResponse, TBody = unknown>(
+    url: string,
+    options?: ApiRequestOptions<TBody>,
+  ) => request<TResponse, TBody>(method, url, options)
 }
 
 export const api = {

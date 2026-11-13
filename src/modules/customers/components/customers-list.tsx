@@ -70,13 +70,3 @@ export function CustomersList({
     )
 }
 
-function whatsappHref(phone: string) {
-    const digits = phone.replace(/\D/g, "")
-    const withCountry = digits.startsWith("55") ? digits : `55${digits}`
-    return `https://wa.me/${withCountry}`
-}
-
-function mapsHref(customer: Customer) {
-    const query = [customer.street, customer.house_number, customer.district, "Mesquita - RJ"].filter(Boolean).join(", ")
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
-}

@@ -18,10 +18,15 @@ export const customersService = {
     },
 
     update(id: string, body: CustomerBody) {
+        console.log(body)
         return api.put<CustomerMutationResponse>(`/customers/${id}`, { body })
     },
 
     get(id: Customer['id']) {
         return api.get<CustomerDetailsResponse>(`/customers/${id}`)
+    },
+
+    delete(id: Customer['id']) {
+        return api.delete<CustomerMutationResponse>(`/customers/${id}`)
     },
 }

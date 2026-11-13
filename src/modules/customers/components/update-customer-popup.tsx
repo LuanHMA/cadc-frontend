@@ -11,7 +11,9 @@ export function UpdateCustomerPopup({ customer }: { customer: Customer }) {
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
             <Dialog.Trigger asChild>
-                <Button variant="outline" size="sm" aria-label={`Editar ${customer.name}`} leftIcon={<PencilIcon />} />
+                <Button variant="outline" className="w-full" leftIcon={<PencilIcon className="size-4" />}>
+                    Editar
+                </Button>
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 bg-background-inverse/50 data-[state=open]:animate-fadeIn" />

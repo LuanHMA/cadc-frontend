@@ -22,10 +22,11 @@ export function useLogin() {
       establishSession(response.user)
       toast.success(response.message)
 
-      const from = (location.state as { from?: string } | null)?.from
+      // Redireciona para a última página visitada ou para a página inicial
+      const from = (location.state as { lastPathVisited?: string } | null)?.lastPathVisited
       navigate(from && from !== "/entrar" ? from : "/", { replace: true })
     } catch (error) {
-      toast.error(getApiErrorMessage(error, "Não foi possível entrar. Tente novamente."))
+      toast.error(getApiErrorMessage(error, "Não foi possível entrar. Tente novamente mais tarde."))
     }
   }
 

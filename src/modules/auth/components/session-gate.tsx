@@ -16,7 +16,7 @@ export function RequireSession({ children }: { children: ReactNode }) {
 
   if (status === "loading") return <SessionLoading />
   if (status === "anonymous") {
-    return <Navigate to="/entrar" state={{ from: location.pathname }} replace />
+    return <Navigate to="/entrar" state={{ lastPathVisited: location.pathname }} replace />
   }
 
   return children

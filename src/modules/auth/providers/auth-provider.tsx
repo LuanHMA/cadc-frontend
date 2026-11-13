@@ -1,7 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react"
-import { bindSessionLost } from "../../../shared/lib/api"
-import { authService } from "../services/auth.service"
 import { type User } from "../contracts/session.contract"
+import { authService } from "../services/auth.service"
 import { AuthContext } from "./auth-context"
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -9,32 +8,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    return bindSessionLost(() => {
-      setUser(null)
-      setReady(true)
-    })
-  }, [])
-
-  useEffect(() => {
-    let active = true
-
-    authService
-      .me()
-      .then((data) => {
-        if (!active) return
-        setUser(data)
-      })
-      .catch(() => {
-        if (!active) return
-        setUser(null)
-      })
-      .finally(() => {
-        if (active) setReady(true)
-      })
-
-    return () => {
-      active = false
+    const checkSession = async () => {
+      authService
+        .me()
+        .then(setUser)
+        .catch(() => setUser(null))
+        .finally(() => setReady(true))
     }
+
+    checkSession()
   }, [])
 
   const establishSession = (userData: User) => {
@@ -43,12 +25,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const logout = async () => {
-    try {
-      await authService.logout()
-    } catch {
-    } finally {
-      setUser(null)
-    }
+    await authService.logout().catch(() => { })
+    setUser(null)
   }
 
   const status = !ready ? "loading" : user ? "authenticated" : "anonymous"
