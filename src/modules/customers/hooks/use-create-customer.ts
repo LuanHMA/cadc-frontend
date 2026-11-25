@@ -3,11 +3,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 import { getApiErrorMessage } from "../../../shared/lib/api"
-import { CustomerFormSchema, emptyCustomerForm, toCustomerBody, type CustomerBody, type CustomerFormSchemaType } from "../contracts/customers-contracts"
+import { CustomerFormSchema, emptyCustomerForm, toCustomerBody, type Customer, type CustomerBody, type CustomerFormSchemaType } from "../contracts/customers-contracts"
 import { customersService } from "../services/customers.service"
 import { customersQueryKey } from "./use-get-customer"
 
-export function useCreateCustomer(onCreated: () => void) {
+export function useCreateCustomer(onCreated: (customer?: Customer) => void) {
     const queryClient = useQueryClient()
 
     const { handleSubmit, control, reset, formState: { isSubmitting } } = useForm<CustomerFormSchemaType>({
@@ -25,7 +25,7 @@ export function useCreateCustomer(onCreated: () => void) {
             const response = await mutateAsync(toCustomerBody(data))
             toast.success(response.message)
             reset(emptyCustomerForm)
-            onCreated()
+            onCreated(response.customer)
         } catch (error) {
             toast.error(getApiErrorMessage(error, "Não foi possível criar o cliente."))
         }

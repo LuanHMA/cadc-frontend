@@ -33,6 +33,19 @@ export function formatPhone(phone: string) {
     return phone
 }
 
+export function formatDateOnly(date: string) {
+    const [year, month, day] = date.split("-")
+    if (!year || !month || !day) return date
+    return `${day}/${month}/${year}`
+}
+
+export function todayDateOnly() {
+    const now = new Date()
+    const month = String(now.getMonth() + 1).padStart(2, "0")
+    const day = String(now.getDate()).padStart(2, "0")
+    return `${now.getFullYear()}-${month}-${day}`
+}
+
 export function formatDate(date: string) {
     return new Date(date).toLocaleDateString("pt-BR", {
         day: "2-digit",

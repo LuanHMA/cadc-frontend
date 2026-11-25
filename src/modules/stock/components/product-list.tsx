@@ -1,13 +1,8 @@
-import { Armchair, Boxes, SearchX, Table2, type LucideIcon } from "lucide-react";
+import { SearchX } from "lucide-react";
 import { currency } from "../../../shared/utils/formatations";
 import type { Product } from "../contracts/stock.contracts";
+import { productTypes } from "./product-types";
 import { UpdateProductPopup } from "./update-product-popup";
-
-const productTypes: Record<Product["id"], { icon: LucideIcon; tone: string }> = {
-    TABLE: { icon: Table2, tone: "bg-badge-info-bg text-badge-info-content" },
-    CHAIR: { icon: Armchair, tone: "bg-badge-accent-bg text-badge-accent-content" },
-    KIT: { icon: Boxes, tone: "bg-badge-success-bg text-badge-success-content" },
-}
 
 export function ProductList({ products }: { products: Product[] }) {
     if (products.length === 0) {

@@ -1,18 +1,26 @@
 import { Plus, UserPlus } from "lucide-react"
 import { Dialog } from "radix-ui"
-import { useState } from "react"
+import { useState, type ReactNode } from "react"
 import { Button } from "../../../shared/components/ui"
+import type { Customer } from "../contracts/customers-contracts"
 import { CreateCustomerForm } from "./create-customer-form"
 
-export function CreateCustomerPopup() {
+type CreateCustomerPopupProps = {
+    trigger?: ReactNode
+    onCreated?: (customer: Customer) => void
+}
+
+export function CreateCustomerPopup({ trigger, onCreated }: CreateCustomerPopupProps) {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
             <Dialog.Trigger asChild>
-                <Button leftIcon={<Plus />}>
-                    Novo cliente
-                </Button>
+                {trigger ?? (
+                    <Button leftIcon={<Plus />}>
+                        Novo cliente
+                    </Button>
+                )}
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 bg-background-inverse/50 data-[state=open]:animate-fadeIn" />
@@ -24,7 +32,7 @@ export function CreateCustomerPopup() {
                         Novo cliente
                     </Dialog.Title>
 
-                    <CreateCustomerForm onClose={() => setIsOpen(false)} />
+                    <CreateCustomerForm onClose={() => setIsOpen(false)} onCreated={onCreated} />
                 </Dialog.Content>
             </Dialog.Portal>
         </Dialog.Root>
