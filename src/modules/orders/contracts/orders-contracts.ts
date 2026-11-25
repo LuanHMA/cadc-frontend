@@ -7,6 +7,8 @@ export type OrderStatus = "PENDING_DELIVERY" | "DELIVERED" | "CANCELLED" | "PEND
 
 export type PaymentMethod = "CASH" | "PIX" | "CREDIT_CARD" | "DEBIT_CARD" | "OTHER"
 
+export type ItemType = "TABLE" | "CHAIR" | "KIT"
+
 export type Order = {
     id: string
     customer_id: string
@@ -19,7 +21,10 @@ export type Order = {
     created_at: string
     updated_at: string
     customer: Customer
-    items: OrderItem[]
+    items: {
+        quantity: number,
+        type: ItemType,
+    }[]
 }
 
 export type OrderItem = {
@@ -27,9 +32,7 @@ export type OrderItem = {
     quantity: number
     unit_price: number
     subtotal: number
-    product: {
-        name: string
-    }
+    name: string
 }
 
 export type GetOrdersResponse = {
@@ -55,6 +58,24 @@ export const CreateOrderSchema = z.object({
 })
 
 export type CreateOrderSchemaType = z.infer<typeof CreateOrderSchema>
+
+export const UpdateOrderSchema = z.object({
+    customer_id: z.string("Cliente é obrigatório").trim().min(1, "Cliente é obrigatório"),
+    delivery_date: z.string("Data de entrega é obrigatória").trim().min(1, "Data de entrega é obrigatória"),
+    pickup_date: z.string("Data de retirada é obrigatória").trim().min(1, "Data de retirada é obrigatória"),
+    payment_method: z.enum(["CASH", "PIX", "CREDIT_CARD", "DEBIT_CARD", "OTHER"], "Forma de pagamento é obrigatória"),
+    observations: z.string("Observações são obrigatórias").trim(),
+    status: z.enum(["PENDING_DELIVERY", "DELIVERED", "CANCELLED", "PENDING_PICKUP", "COMPLETED"]),
+    items: z.array(z.object({
+        product_id: z.enum(["TABLE", "CHAIR", "KIT"]),
+        qtd: z.number("Quantidade é obrigatória").min(1, "Quantidade deve ser maior que 0"),
+    })).min(1, "Selecione ao menos um item"),
+}).refine((data) => data.pickup_date >= data.delivery_date, {
+    path: ["pickup_date"],
+    message: "Data de recolhimento deve ser igual ou posterior à entrega",
+})
+
+export type UpdateOrderSchemaType = z.infer<typeof UpdateOrderSchema>
 
 export const emptyOrderForm: Partial<CreateOrderSchemaType> = {
     customer_id: "",

@@ -10,8 +10,9 @@ export type PaginationProps = {
 }
 
 export function Pagination({ page, totalPages, onPageChange, className }: PaginationProps) {
-  const safeTotal = Math.max(totalPages, 1)
-  const safePage = Math.min(Math.max(page, 1), safeTotal)
+  const safeTotal = Number.isFinite(totalPages) ? Math.max(Math.floor(totalPages), 1) : 1
+  const normalizedPage = Number.isFinite(page) ? Math.floor(page) : 1
+  const safePage = Math.min(Math.max(normalizedPage, 1), safeTotal)
   const pages = visiblePages(safePage, safeTotal)
 
   function changePage(nextPage: number) {

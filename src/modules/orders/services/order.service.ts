@@ -1,5 +1,22 @@
 import { api } from "../../../shared/lib/api"
-import type { CreateOrderResponse, CreateOrderSchemaType, GetOrdersResponse } from "../contracts/orders-contracts"
+import type {
+    CreateOrderResponse,
+    CreateOrderSchemaType,
+    GetOrdersResponse,
+    OrderStatus,
+    UpdateOrderSchemaType,
+} from "../contracts/orders-contracts"
+
+export type ListOrdersQuery = {
+    page: number
+    limit: number
+    name?: string
+    status?: OrderStatus
+    delivery_date_from?: string
+    delivery_date_to?: string
+    pickup_date_from?: string
+    pickup_date_to?: string
+}
 
 export const orderService = {
     create: async (order: CreateOrderSchemaType) => {
@@ -9,12 +26,16 @@ export const orderService = {
         return response.order
     },
 
-    list: async ({ page, limit }: { page: number; limit: number }): Promise<GetOrdersResponse> => {
+    update: (id: string, order: UpdateOrderSchemaType) =>
+        api.put<{ message: string }>(`/orders/${id}`, { body: order }),
+
+    delete: (id: string) =>
+        api.delete<{ message: string }>(`/orders/${id}`),
+
+    list: async (query: ListOrdersQuery, signal?: AbortSignal): Promise<GetOrdersResponse> => {
         const response = await api.get<GetOrdersResponse>("/orders", {
-            params: {
-                page,
-                limit,
-            },
+            query,
+            signal,
         })
         return response
     },
