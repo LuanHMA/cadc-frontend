@@ -23,19 +23,19 @@ export function OrderItemsBlock({ control, products, isLoading }: OrderItemsBloc
     const items = field.value ?? []
     const error = fieldState.error?.message ?? fieldState.error?.root?.message
 
-    function quantityOf(productId: Product["id"]) {
-        return items.find((item) => item.product_id === productId)?.quantity ?? 0
+    function qtdOf(productId: Product["id"]) {
+        return items.find((item) => item.product_id === productId)?.qtd ?? 0
     }
 
-    function setQuantity(product: Product, quantity: number) {
-        const next = Math.min(Math.max(0, Math.floor(quantity) || 0), product.disponible_stock)
+    function setQtd(product: Product, qtd: number) {
+        const next = Math.min(Math.max(0, Math.floor(qtd) || 0), product.disponible_stock)
         field.onChange(
             products
                 .map((current) => ({
                     product_id: current.id,
-                    quantity: current.id === product.id ? next : quantityOf(current.id),
+                    qtd: current.id === product.id ? next : qtdOf(current.id),
                 }))
-                .filter((item) => item.quantity > 0),
+                .filter((item) => item.qtd > 0),
         )
     }
 
@@ -58,8 +58,8 @@ export function OrderItemsBlock({ control, products, isLoading }: OrderItemsBloc
                         <OrderItemCard
                             key={product.id}
                             product={product}
-                            quantity={quantityOf(product.id)}
-                            onQuantityChange={(quantity) => setQuantity(product, quantity)}
+                            qtd={qtdOf(product.id)}
+                            onQtdChange={(qtd) => setQtd(product, qtd)}
                         />
                     ))}
                 </div>
@@ -71,16 +71,16 @@ export function OrderItemsBlock({ control, products, isLoading }: OrderItemsBloc
 
 type OrderItemCardProps = {
     product: Product
-    quantity: number
-    onQuantityChange: (quantity: number) => void
+    qtd: number
+    onQtdChange: (qtd: number) => void
 }
 
-function OrderItemCard({ product, quantity, onQuantityChange }: OrderItemCardProps) {
+function OrderItemCard({ product, qtd, onQtdChange }: OrderItemCardProps) {
     const { icon: Icon, tone } = productTypes[product.id]
-    const unitPrice = getItemUnitPrice(product, quantity)
+    const unitPrice = getItemUnitPrice(product, qtd)
     const hasPromotion = unitPrice !== product.unit_price
     const unavailable = product.disponible_stock === 0
-    const selected = quantity > 0
+    const selected = qtd > 0
 
     return (
         <article
@@ -120,8 +120,8 @@ function OrderItemCard({ product, quantity, onQuantityChange }: OrderItemCardPro
                         size="sm"
                         aria-label={`Remover ${product.name}`}
                         leftIcon={<Minus />}
-                        disabled={quantity === 0}
-                        onClick={() => onQuantityChange(quantity - 1)}
+                        disabled={qtd === 0}
+                        onClick={() => onQtdChange(qtd - 1)}
                     />
                     <input
                         type="number"
@@ -129,10 +129,10 @@ function OrderItemCard({ product, quantity, onQuantityChange }: OrderItemCardPro
                         min={0}
                         max={product.disponible_stock}
                         aria-label={`Quantidade de ${product.name}`}
-                        value={quantity}
+                        value={qtd}
                         disabled={unavailable}
                         onFocus={(event) => event.target.select()}
-                        onChange={(event) => onQuantityChange(Number(event.target.value))}
+                        onChange={(event) => onQtdChange(Number(event.target.value))}
                         className="h-8 w-14 rounded-md border border-input-border bg-input-bg text-center text-sm font-semibold tabular-nums text-input-content outline-none focus:border-input-focus-border focus:ring-2 focus:ring-input-focus-ring disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                     />
                     <Button
@@ -141,14 +141,14 @@ function OrderItemCard({ product, quantity, onQuantityChange }: OrderItemCardPro
                         size="sm"
                         aria-label={`Adicionar ${product.name}`}
                         leftIcon={<Plus />}
-                        disabled={quantity >= product.disponible_stock}
-                        onClick={() => onQuantityChange(quantity + 1)}
+                        disabled={qtd >= product.disponible_stock}
+                        onClick={() => onQtdChange(qtd + 1)}
                     />
                 </div>
                 <div className="w-28 text-right">
                     <p className="text-xs text-content-muted">Total</p>
                     <p className={`text-base font-semibold tabular-nums ${selected ? "text-content-primary" : "text-content-muted"}`}>
-                        {currency.format(getItemTotal(product, quantity))}
+                        {currency.format(getItemTotal(product, qtd))}
                     </p>
                 </div>
             </div>

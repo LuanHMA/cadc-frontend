@@ -18,7 +18,6 @@ export function CreateCustomerForm({ onClose, onCreated }: CreateCustomerFormPro
         <form
             className="mt-4 space-y-4"
             onSubmit={(event) => {
-                // React propagates submit through portals, so a parent form would also submit.
                 event.stopPropagation()
                 handleSubmit(onCreate)(event)
             }}

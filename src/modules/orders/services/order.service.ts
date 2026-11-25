@@ -9,13 +9,13 @@ export const orderService = {
         return response.order
     },
 
-    getOrders: async (page: number, limit: number) => {
+    list: async ({ page, limit }: { page: number; limit: number }): Promise<GetOrdersResponse> => {
         const response = await api.get<GetOrdersResponse>("/orders", {
             params: {
                 page,
                 limit,
             },
         })
-        return response.orders
+        return response
     },
 }

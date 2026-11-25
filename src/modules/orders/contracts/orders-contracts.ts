@@ -44,10 +44,10 @@ export const CreateOrderSchema = z.object({
     delivery_date: z.string("Data de entrega é obrigatória").trim().min(1, "Data de entrega é obrigatória"),
     pickup_date: z.string("Data de retirada é obrigatória").trim().min(1, "Data de retirada é obrigatória"),
     payment_method: z.enum(["CASH", "PIX", "CREDIT_CARD", "DEBIT_CARD", "OTHER"], "Forma de pagamento é obrigatória"),
-    observations: z.string("Observações são obrigatórias").trim().min(1, "Observações são obrigatórias"),
+    observations: z.string("Observações são obrigatórias").trim().optional(),
     items: z.array(z.object({
         product_id: z.enum(["TABLE", "CHAIR", "KIT"]),
-        quantity: z.number("Quantidade é obrigatória").min(1, "Quantidade deve ser maior que 0"),
+        qtd: z.number("Quantidade é obrigatória").min(1, "Quantidade deve ser maior que 0"),
     })).min(1, "Selecione ao menos um item"),
 }).refine((data) => !data.delivery_date || !data.pickup_date || data.pickup_date >= data.delivery_date, {
     path: ["pickup_date"],

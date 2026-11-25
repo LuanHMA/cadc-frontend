@@ -72,7 +72,7 @@ export function OrderCustomerBlock({ control, selectedCustomer, onSelectCustomer
         >
             <div className="relative">
                 <Input
-                    ref={(node) => field.ref(node)}
+                    error={fieldState.error?.message}
                     type="search"
                     role="combobox"
                     aria-expanded={open}
@@ -81,7 +81,6 @@ export function OrderCustomerBlock({ control, selectedCustomer, onSelectCustomer
                     autoComplete="off"
                     leftIcon={<Search />}
                     value={query}
-                    error={fieldState.error?.message}
                     onFocus={(event) => {
                         event.target.select()
                         setOpen(true)

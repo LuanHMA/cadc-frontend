@@ -2,7 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router"
 import { toast } from "react-toastify"
 import { getApiErrorMessage } from "../../../shared/lib/api"
 import type { Customer } from "../../customers/contracts/customers-contracts"
@@ -14,10 +13,9 @@ export const ordersQueryKey = ["orders"] as const
 
 export function useCreateOrder() {
     const queryClient = useQueryClient()
-    const navigate = useNavigate()
     const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
 
-    const { handleSubmit, control, setValue, formState: { isSubmitting } } = useForm<CreateOrderSchemaType>({
+    const { handleSubmit, control, setValue, reset, formState: { isSubmitting } } = useForm<CreateOrderSchemaType>({
         resolver: zodResolver(CreateOrderSchema),
         defaultValues: emptyOrderForm,
     })
@@ -39,7 +37,7 @@ export function useCreateOrder() {
         try {
             await mutateAsync(data)
             toast.success("Pedido criado com sucesso")
-            navigate("/pedidos")
+            reset()
         } catch (error) {
             toast.error(getApiErrorMessage(error, "Não foi possível criar o pedido."))
         }

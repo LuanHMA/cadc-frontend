@@ -24,9 +24,9 @@ export function OrderSummary({ control, customer, products, isSubmitting }: Orde
         if (!product) return []
         return [{
             product,
-            quantity: item.quantity,
-            promotional: getItemUnitPrice(product, item.quantity) !== product.unit_price,
-            total: getItemTotal(product, item.quantity),
+            qtd: item.qtd,
+            promotional: getItemUnitPrice(product, item.qtd) !== product.unit_price,
+            total: getItemTotal(product, item.qtd),
         }]
     })
     const total = lines.reduce((sum, line) => sum + line.total, 0)
@@ -54,7 +54,7 @@ export function OrderSummary({ control, customer, products, isSubmitting }: Orde
                         {lines.map((line) => (
                             <li key={line.product.id} className="flex items-baseline justify-between gap-3 text-sm">
                                 <span className="text-content-primary">
-                                    <span className="font-semibold tabular-nums">{line.quantity}x</span> {line.product.name}
+                                    <span className="font-semibold tabular-nums">{line.qtd}x</span> {line.product.name}
                                     {line.promotional ? <span className="ml-1 text-xs text-content-accent">(promo)</span> : null}
                                 </span>
                                 <span className="font-medium tabular-nums text-content-primary">{currency.format(line.total)}</span>
