@@ -85,7 +85,7 @@ export function MesquitaAddressFields({ control }: { control: Control<CustomerFo
                         onChange={(event) => onQueryChange(event.target.value)}
                     />
                     {listOpen ? (
-                        <div className="mt-1 max-h-52 overflow-y-auto rounded-lg border border-brd-default bg-background-elevated shadow-lg">
+                        <div className="mt-1 max-h-52 overflow-y-auto  rounded-xl border border-brd-default bg-background-elevated  ">
                             {status === "loading" ? <p className="px-3 py-2 text-sm text-content-muted">Buscando ruas em Mesquita...</p> : null}
                             {status === "error" ? <p className="px-3 py-2 text-sm text-content-danger">Não foi possível buscar o endereço.</p> : null}
                             {status === "empty" ? <p className="px-3 py-2 text-sm text-content-muted">Nenhuma rua de Mesquita encontrada.</p> : null}

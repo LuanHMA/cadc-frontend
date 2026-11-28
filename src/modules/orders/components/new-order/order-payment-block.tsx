@@ -26,7 +26,7 @@ export function OrderPaymentBlock({ control }: { control: Control<CreateOrderSch
                         return (
                             <label
                                 key={value}
-                                className={`flex cursor-pointer flex-col items-center gap-1.5 rounded-lg border p-3 text-sm font-medium transition-colors has-focus-visible:ring-2 has-focus-visible:ring-input-focus-ring ${checked ? "border-brd-accent bg-badge-accent-bg text-badge-accent-content" : "border-brd-default text-content-primary hover:border-brd-strong"}`}
+                                className={`flex cursor-pointer flex-col items-center gap-1.5  rounded-xl border p-3 text-sm font-medium transition-colors has-focus-visible:ring-2 has-focus-visible:ring-input-focus-ring ${checked ? "border-brd-accent bg-badge-accent-bg text-badge-accent-content" : "border-brd-default text-content-primary hover:border-brd-strong"}`}
                             >
                                 <input
                                     ref={value === "PIX" ? (node) => field.ref(node) : undefined}

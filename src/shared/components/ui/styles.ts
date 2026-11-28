@@ -6,9 +6,9 @@ export type FieldVariant = (typeof fieldVariants)[number]
 
 export const controlSizeClass: Record<ControlSize, string> = {
   sm: "h-8 rounded-md text-sm",
-  md: "h-10 rounded-lg text-sm",
-  lg: "h-12 rounded-lg text-base",
-  icon: "rounded-lg text-sm",
+  md: "h-10  rounded-xl text-sm",
+  lg: "h-12  rounded-xl text-base",
+  icon: " rounded-xl text-sm",
 }
 
 export const controlPaddingClass: Record<ControlSize, string> = {

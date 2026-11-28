@@ -8,12 +8,11 @@ export function PrivateLayout() {
   if (!user) return null
 
   return (
-    <div className="flex min-h-screen w-screen overflow-hidden bg-background-canvas">
+    <div className="min-h-screen flex bg-background-canvas">
       <AppSidebar />
-      <div className="min-w-0 flex-1 p-4">
-        <main className="h-full overflow-auto rounded-2xl bg-background-surface shadow-sm ring-1 ring-brd-subtle p-6">
-          <Outlet />
-        </main>
+
+      <div className="p-6 bg-background-base min-h-screen flex-1">
+        <Outlet />
       </div>
     </div>
   )

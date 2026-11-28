@@ -28,8 +28,8 @@ export function AppSidebar() {
   }
 
   return (
-    <aside className="relative w-64 flex-col bg-background-canvas px-3 py-4">
-      <div className="fixed w-58 bottom-4 top-4 flex flex-col">
+    <aside className="relative w-68 flex-col bg-background-canvas px-3 py-4">
+      <div className="fixed w-60 bottom-4 top-4 flex flex-col">
         <NavLink to="/" className="flex items-center gap-2.5 rounded-xl px-2 py-1.5">
           <LogoMark className="size-9" />
           <span className="text-base font-semibold tracking-tight text-content-inverse">CADC</span>
@@ -43,7 +43,7 @@ export function AppSidebar() {
               end
               className={({ isActive }) =>
                 cn(
-                  "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  "flex items-center gap-2.5  rounded-xl px-3 py-2 text-sm font-medium transition-colors",
                   isActive
                     ? "bg-background-accent text-content-inverse"
                     : "text-content-inverse/70 hover:bg-background-surface/10 hover:text-content-inverse",

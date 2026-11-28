@@ -32,7 +32,7 @@ export function OrderSummary({ control, customer, products, isSubmitting }: Orde
     const total = lines.reduce((sum, line) => sum + line.total, 0)
 
     return (
-        <aside className="w-full space-y-4 rounded-2xl border border-brd-default bg-background-elevated p-5 lg:sticky lg:top-0 lg:w-80">
+        <aside className="w-full space-y-4 rounded-xl border border-brd-default shadow-sm bg-background-elevated p-5 lg:sticky lg:top-4 lg:w-80">
             <h2 className="flex items-center gap-2 border-b border-brd-subtle pb-4 text-base font-semibold text-content-primary">
                 <ReceiptText className="size-5 text-content-accent" />
                 Resumo do pedido

@@ -19,7 +19,7 @@ function CustomerRowSkeleton() {
 export function CustomersListLoading() {
     return (
         <div
-            className="flex flex-col gap-4 rounded-lg border border-brd-default p-4"
+            className="flex flex-col gap-4  rounded-xl border border-brd-default p-4"
             role="status"
             aria-busy="true"
             aria-label="Carregando clientes"
@@ -27,11 +27,11 @@ export function CustomersListLoading() {
             <div className="grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
                 <div className="space-y-2">
                     <Bone className="h-4 w-12" />
-                    <Bone className="h-10 w-full rounded-lg" />
+                    <Bone className="h-10 w-full  rounded-xl" />
                 </div>
                 <div className="space-y-2">
                     <Bone className="h-4 w-16" />
-                    <Bone className="h-10 w-full rounded-lg" />
+                    <Bone className="h-10 w-full  rounded-xl" />
                 </div>
             </div>
 
@@ -44,9 +44,9 @@ export function CustomersListLoading() {
             <div className="flex items-center justify-between gap-3">
                 <Bone className="h-4 w-24" />
                 <div className="flex items-center gap-2">
-                    <Bone className="h-9 w-24 rounded-lg" />
-                    <Bone className="size-9 rounded-lg" />
-                    <Bone className="h-9 w-24 rounded-lg" />
+                    <Bone className="h-9 w-24  rounded-xl" />
+                    <Bone className="size-9  rounded-xl" />
+                    <Bone className="h-9 w-24  rounded-xl" />
                 </div>
             </div>
         </div>

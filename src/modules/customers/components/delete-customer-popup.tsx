@@ -37,9 +37,9 @@ export function DeleteCustomerPopup({ customer }: { customer: Customer }) {
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 bg-background-inverse/50 data-[state=open]:animate-fadeIn" />
-                <Dialog.Content className="fixed left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-[500px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-background-elevated p-5 shadow-lg focus:outline-none data-[state=open]:animate-fadeIn">
+                <Dialog.Content className="fixed left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-[500px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl bg-background-elevated p-5   focus:outline-none data-[state=open]:animate-fadeIn">
                     <Dialog.Title className="m-0 flex items-center gap-2.5 border-b border-brd-subtle pb-4 text-[17px] font-medium text-content-primary">
-                        <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-badge-accent-bg text-badge-accent-content">
+                        <span className="flex size-8 shrink-0 items-center justify-center  rounded-xl bg-badge-accent-bg text-badge-accent-content">
                             <TrashIcon className="size-4" />
                         </span>
                         <span className="min-w-0">Excluir cliente</span>

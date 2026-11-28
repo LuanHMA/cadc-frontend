@@ -93,7 +93,7 @@ export function OrderCustomerBlock({ control, selectedCustomer, onSelectCustomer
                     onChange={(event) => onQueryChange(event.target.value)}
                 />
                 {open ? (
-                    <div className="absolute inset-x-0 top-full z-20 mt-1 max-h-64 overflow-y-auto rounded-lg border border-brd-default bg-background-elevated shadow-lg">
+                    <div className="absolute inset-x-0 top-full z-20 mt-1 max-h-64 overflow-y-auto  rounded-xl border border-brd-default bg-background-elevated ">
                         {isError ? (
                             <p className="px-3 py-2 text-sm text-content-danger">Não foi possível buscar os clientes.</p>
                         ) : customers.length === 0 ? (
@@ -129,7 +129,7 @@ export function OrderCustomerBlock({ control, selectedCustomer, onSelectCustomer
 
 function SelectedCustomerInfo({ customer }: { customer: Customer }) {
     return (
-        <div className="grid grid-cols-1 gap-3 rounded-lg border border-brd-default bg-background-base p-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3  rounded-xl border border-brd-default bg-background-base p-4 md:grid-cols-3">
             <div className="flex items-start gap-2">
                 <User className="mt-0.5 size-4 shrink-0 text-content-muted" />
                 <div className="min-w-0">

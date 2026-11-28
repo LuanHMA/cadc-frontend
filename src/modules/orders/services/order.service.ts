@@ -29,8 +29,12 @@ export const orderService = {
     update: (id: string, order: UpdateOrderSchemaType) =>
         api.put<{ message: string }>(`/orders/${id}`, { body: order }),
 
-    delete: (id: string) =>
-        api.delete<{ message: string }>(`/orders/${id}`),
+    cancelOrder: (id: string) =>
+        api.put<{ message: string }>(`/orders/${id}`, {
+            body: {
+                status: "CANCELLED",
+            }
+        }),
 
     list: async (query: ListOrdersQuery, signal?: AbortSignal): Promise<GetOrdersResponse> => {
         const response = await api.get<GetOrdersResponse>("/orders", {

@@ -22,8 +22,8 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 const sizeClass: Record<ControlSize, string> = {
   icon: "p-2 rounded-md ",
   sm: "h-8 rounded-md text-sm",
-  md: "h-10 rounded-lg text-sm",
-  lg: "h-12 rounded-lg text-base",
+  md: "h-10  rounded-xl text-sm",
+  lg: "h-12  rounded-xl text-base",
 }
 
 const paddingClass: Record<ControlSize, string> = {

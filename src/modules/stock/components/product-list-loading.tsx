@@ -7,7 +7,7 @@ function Bone({ className }: { className: string }) {
 function ProductCardSkeleton() {
     return (
         <article
-            className="flex flex-col rounded-2xl border border-brd-default bg-background-elevated p-5 space-y-5"
+            className="flex flex-col rounded-xl border border-brd-default bg-background-elevated p-5 space-y-5"
             aria-hidden
         >
             <div className="flex items-center gap-3">
@@ -28,7 +28,7 @@ function ProductCardSkeleton() {
                 </div>
             </div>
 
-            <Bone className="h-10 w-full rounded-lg" />
+            <Bone className="h-10 w-full  rounded-xl" />
         </article>
     )
 }

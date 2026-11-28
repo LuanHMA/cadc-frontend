@@ -132,7 +132,7 @@ export function UpdateOrderForm({ order, onClose, onUpdated }: UpdateOrderFormPr
                         const maxQuantity = (product?.disponible_stock ?? 0) + currentOrderQuantity
 
                         return (
-                            <div key={id} className="flex items-center justify-between gap-3 rounded-lg bg-background-base px-3 py-2">
+                            <div key={id} className="flex items-center justify-between gap-3  rounded-xl bg-background-base px-3 py-2">
                                 <span className="min-w-0 truncate text-sm font-medium text-content-primary">
                                     {product?.name ?? fallbackName}
                                 </span>
@@ -259,7 +259,7 @@ function CustomerPicker({
                     }}
                 />
                 {isOpen ? (
-                    <div className="absolute inset-x-0 top-full z-20 mt-1 max-h-56 overflow-y-auto rounded-lg border border-brd-default bg-background-elevated shadow-lg">
+                    <div className="absolute inset-x-0 top-full z-20 mt-1 max-h-56 overflow-y-auto  rounded-xl border border-brd-default bg-background-elevated  ">
                         {isError ? (
                             <p className="px-3 py-2 text-sm text-content-danger">Não foi possível buscar os clientes.</p>
                         ) : customers.length === 0 ? (

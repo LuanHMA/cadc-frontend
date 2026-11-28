@@ -9,7 +9,7 @@ export function NewOrderPage() {
                 <Link
                     to="/pedidos"
                     aria-label="Voltar para pedidos"
-                    className="flex size-9 items-center justify-center rounded-lg border border-brd-default text-content-muted transition-colors hover:text-content-primary"
+                    className="flex size-9 items-center justify-center  rounded-xl border border-brd-default text-content-muted transition-colors hover:text-content-primary"
                 >
                     <ArrowLeft className="size-4" />
                 </Link>

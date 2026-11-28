@@ -7,6 +7,7 @@ import { OrdersPage } from "./pages/orders/index.tsx"
 import { NewOrderPage } from "./pages/orders/new-order/index.tsx"
 import { StockPage } from "./pages/stock/index.tsx"
 import { PrivateLayout } from "./shared/components/layout/private-layout.tsx"
+import { DailyLogisticPage } from "./pages/daily-logistic/index.tsx"
 
 export function AppRoutes() {
   return (
@@ -33,6 +34,7 @@ export function AppRoutes() {
         <Route path="/clientes" element={<CustomersPage />} />
         <Route path="/pedidos/novo" element={<NewOrderPage />} />
         <Route path="/pedidos" element={<OrdersPage />} />
+        <Route path="/logistica-diaria" element={<DailyLogisticPage />} />
       </Route>
       <Route
         path="*"

@@ -85,7 +85,7 @@ function TextareaControl({
         aria-invalid={Boolean(error) || undefined}
         aria-describedby={fieldDescribedBy(textareaId, error, hint)}
         className={cn(
-          "min-h-24 w-full resize-y rounded-lg border px-3 py-2 text-sm transition-[color,background-color,border-color,box-shadow] duration-150 outline-none placeholder:text-input-placeholder focus:ring-2 disabled:cursor-not-allowed disabled:border-input-disabled-border disabled:bg-input-disabled-bg disabled:text-input-disabled-content",
+          "min-h-24 w-full resize-y  rounded-xl border px-3 py-2 text-sm transition-[color,background-color,border-color,box-shadow] duration-150 outline-none placeholder:text-input-placeholder focus:ring-2 disabled:cursor-not-allowed disabled:border-input-disabled-border disabled:bg-input-disabled-bg disabled:text-input-disabled-content",
           fieldVariantClass[resolvedVariant],
           className,
         )}

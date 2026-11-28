@@ -4,7 +4,7 @@ import { currency, formatPhone } from "../../../../shared/utils/formatations"
 import { paymentMethodLabels, type ItemType, type Order } from "../../contracts/orders-contracts"
 import { formatOrderDate, formatOrderDateTime } from "./order-display"
 import { OrderStatusBadge } from "./order-status-badge"
-import { DeleteOrderPopup } from "./delete-order-popup"
+import { CancelOrderPopup } from "./cancel-order-popup"
 import { UpdateOrderPopup } from "./update-order-popup"
 import { Button } from "../../../../shared/components/ui"
 
@@ -55,7 +55,7 @@ export function OrderDetailsDrawer({ order, onClose }: OrderDetailsDrawerProps) 
 
                     <div className="flex flex-wrap gap-2 border-b border-brd-default p-4">
                         <UpdateOrderPopup order={order} onUpdated={onClose} />
-                        <DeleteOrderPopup order={order} onDeleted={onClose} />
+                        <CancelOrderPopup order={order} onCanceled={onClose} />
                     </div>
 
                     <div className="flex-1 space-y-6 overflow-y-auto p-5">

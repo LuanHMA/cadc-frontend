@@ -181,18 +181,21 @@ const inputPaddingClass: Record<ControlSize, Record<"none" | "left" | "right" | 
   sm: { none: "px-2.5", left: "pr-2.5 pl-8", right: "pl-2.5 pr-8", both: "px-8" },
   md: { none: "px-3", left: "pr-3 pl-9", right: "pl-3 pr-9", both: "px-9" },
   lg: { none: "px-3.5", left: "pr-3.5 pl-10", right: "pl-3.5 pr-10", both: "px-10" },
+  icon: { none: "px-3.5", left: "pr-3.5 pl-10", right: "pl-3.5 pr-10", both: "px-10" },
 }
 
 const dualRightPaddingClass: Record<ControlSize, string> = {
   sm: "pr-14",
   md: "pr-16",
   lg: "pr-20",
+  icon: "pr-20",
 }
 
 const dualRightSlotClass: Record<ControlSize, string> = {
   sm: "w-14 gap-0.5 [&_svg]:size-3.5",
   md: "w-16 gap-1 [&_svg]:size-4",
   lg: "w-20 gap-1 [&_svg]:size-5",
+  icon: "w-20 gap-1 [&_svg]:size-5",
 }
 
 function EyeIcon() {

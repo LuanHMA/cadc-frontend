@@ -7,7 +7,7 @@ import { UpdateProductPopup } from "./update-product-popup";
 export function ProductList({ products }: { products: Product[] }) {
     if (products.length === 0) {
         return (
-            <div className="w-full p-5 rounded-2xl border border-brd-default bg-background-elevated flex items-center gap-2">
+            <div className="w-full p-5 rounded-xl border border-brd-default bg-background-elevated flex items-center gap-2">
                 <SearchX className="size-6 text-content-danger" />
                 <p className="text-sm text-content-danger">Nenhum produto encontrado</p>
             </div>
@@ -22,7 +22,7 @@ export function ProductList({ products }: { products: Product[] }) {
                 return (
                     <article
                         key={product.id}
-                        className={`flex h-full relative flex-col gap-5 rounded-2xl border border-brd-default bg-background-elevated p-5 [&>button]:mt-auto ${product.id === "CHAIR" ? "order-2" : ""}`}
+                        className={`flex h-full relative flex-col gap-5 rounded-xl border border-brd-default bg-background-elevated p-5 [&>button]:mt-auto ${product.id === "CHAIR" ? "order-2" : ""}`}
                     >
 
                         <div className="flex items-center justify-between gap-4">
@@ -40,14 +40,14 @@ export function ProductList({ products }: { products: Product[] }) {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="flex flex-col items-start border border-brd-default rounded-lg p-2 bg-b">
+                            <div className="flex flex-col items-start border border-brd-default  rounded-xl p-2 bg-b">
                                 <h2 className="text-sm font-medium text-content-muted">Estoque Total</h2>
                                 <p className="text-3xl font-semibold tabular-nums tracking-tight text-content-primary">
                                     {product.stock}
                                 </p>
                             </div>
 
-                            <div className="flex flex-col items-start border border-brd-default rounded-lg p-2 bg-background-accent">
+                            <div className="flex flex-col items-start border border-brd-default  rounded-xl p-2 bg-background-accent">
                                 <h2 className="text-sm font-medium text-content-inverse">Disponível</h2>
                                 <p className="text-3xl font-semibold tabular-nums tracking-tight text-content-inverse">
                                     {product.disponible_stock}

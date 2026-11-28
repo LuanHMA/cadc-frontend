@@ -10,7 +10,7 @@ export function CustomerFormFields({ control }: { control: Control<CustomerFormS
             <Input label="Nome" placeholder="Nome do cliente" control={control} name="name" />
             <PhoneInput label="Telefone" control={control} name="phone" />
             <MesquitaAddressFields control={control} />
-            <Input label="Ponto de referência" placeholder="Ponto de referência" control={control} name="complement" />
+            <Input label="Complemento (opcional)" placeholder="Casa, apartamento, etc." control={control} name="complement" />
         </>
     )
 }

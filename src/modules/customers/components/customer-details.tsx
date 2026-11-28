@@ -10,7 +10,7 @@ import { UpdateCustomerPopup } from "./update-customer-popup";
 
 export function CustomerDetailsEmpty({ filtered = false }: { filtered?: boolean }) {
     return (
-        <div className="col-span-1 space-y-4 rounded-lg border border-brd-default p-4">
+        <div className="col-span-1 space-y-4  rounded-xl border border-brd-default p-4">
             <div className="flex items-center gap-3">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-background-accent/10 text-content-muted">
                     <SearchX className="size-5" />
@@ -26,26 +26,26 @@ export function CustomerDetailsEmpty({ filtered = false }: { filtered?: boolean 
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="flex flex-col items-start rounded-lg border border-brd-default p-4">
+                <div className="flex flex-col items-start  rounded-xl border border-brd-default p-4">
                     <h2 className="text-sm font-medium text-content-muted">Telefone</h2>
                     <p className="text-lg font-medium text-content-muted">—</p>
                 </div>
-                <div className="flex flex-col items-start rounded-lg border border-brd-default p-4">
+                <div className="flex flex-col items-start  rounded-xl border border-brd-default p-4">
                     <h2 className="text-sm font-medium text-content-muted">Endereço</h2>
                     <p className="text-lg font-medium text-content-muted">—</p>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <div className="flex flex-col items-start rounded-lg border border-brd-default p-4">
+                <div className="flex flex-col items-start  rounded-xl border border-brd-default p-4">
                     <h2 className="text-sm font-medium text-content-muted">Pedidos em andamento</h2>
                     <p className="text-lg font-medium text-content-muted">—</p>
                 </div>
-                <div className="flex flex-col items-start rounded-lg border border-brd-default p-4">
+                <div className="flex flex-col items-start  rounded-xl border border-brd-default p-4">
                     <h2 className="text-sm font-medium text-content-muted">Pedidos concluídos</h2>
                     <p className="text-lg font-medium text-content-muted">—</p>
                 </div>
-                <div className="flex flex-col items-start rounded-lg border border-brd-default p-4">
+                <div className="flex flex-col items-start  rounded-xl border border-brd-default p-4">
                     <h2 className="text-sm font-medium text-content-muted">Total gasto</h2>
                     <p className="text-lg font-medium text-content-muted">—</p>
                 </div>
@@ -75,7 +75,7 @@ export function CustomerDetails({ customerId }: { customerId: Customer["id"] }) 
     }
 
     return (
-        <div className="border border-brd-default rounded-lg p-4 space-y-4">
+        <div className="bg-background-surface border border-brd-default  rounded-xl p-4 space-y-4">
             <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                     <span className="uppercase font-medium rounded-full w-12 h-12 flex items-center justify-center bg-background-accent/20 text-base">
@@ -100,12 +100,12 @@ export function CustomerDetails({ customerId }: { customerId: Customer["id"] }) 
                 <DeleteCustomerPopup customer={customer} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex flex-col items-start border border-brd-default p-4 rounded-lg">
+                <div className="flex flex-col items-start border border-brd-default p-4  rounded-xl">
                     <h2 className="text-sm text-content-muted font-medium">Telefone</h2>
                     <p className="text-sm text-content-primary font-medium">{formatPhone(customer.phone)}</p>
                 </div>
 
-                <div className="flex flex-col items-start border border-brd-default p-4 rounded-lg">
+                <div className="flex flex-col items-start border border-brd-default p-4  rounded-xl">
                     <h2 className="text-sm text-content-muted font-medium">Endereço</h2>
                     <p className="text-sm text-content-primary font-medium">{customer.street}, {customer.house_number} {customer.district}</p>
                     <p className="text-sm text-content-muted">{customer.complement ? `- ${customer.complement}` : ""}</p>
@@ -113,16 +113,16 @@ export function CustomerDetails({ customerId }: { customerId: Customer["id"] }) 
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="flex flex-col items-start border border-brd-default p-4 rounded-lg">
+                <div className="flex flex-col items-start border border-brd-default p-4  rounded-xl">
                     <h2 className="text-sm text-content-muted font-medium">Pedidos em andamento</h2>
                     <p className="text-lg text-content-primary font-medium">{customer.active_orders}</p>
                 </div>
-                <div className="flex flex-col items-start border border-brd-default p-4 rounded-lg">
+                <div className="flex flex-col items-start border border-brd-default p-4  rounded-xl">
                     <h2 className="text-sm text-content-muted font-medium">Pedidos concluídos</h2>
                     <p className="text-lg text-content-primary font-medium">{customer.completed_orders}</p>
                 </div>
             </div>
-            <div className="flex flex-col items-start border border-brd-default p-4 rounded-lg">
+            <div className="flex flex-col items-start border border-brd-default p-4  rounded-xl">
                 <h2 className="text-sm text-content-muted font-medium">Total gasto</h2>
                 <p className="text-lg text-content-primary font-medium">{currency.format(customer.total_spent)}</p>
             </div>

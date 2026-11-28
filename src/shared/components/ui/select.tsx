@@ -185,7 +185,7 @@ function SelectControl({
           <SelectPrimitive.Content
             position="popper"
             sideOffset={6}
-            className="z-[70] max-h-60 w-(--radix-select-trigger-width) overflow-hidden rounded-lg border border-brd-default bg-background-surface shadow-md"
+            className="z-[70] max-h-60 w-(--radix-select-trigger-width) overflow-hidden  rounded-xl border border-brd-default bg-background-surface shadow-md"
           >
             <SelectPrimitive.Viewport className="p-1">
               {options.map((option) => (
